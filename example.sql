@@ -97,3 +97,21 @@ count(*)
 474
 
 --------------------------------------
+/*
+■レクチャー67
+行数を数える「count」応用
+
+▼例題
+2017年1月にアクセスしたユニークユーザー数
+*/
+
+
+-- 【count(distinct hoge)】は重複をまとめる
+SELECT count(distinct user_id)
+FROM access_logs
+WHERE request_month = '2017-01-01';
+
+↓
+count(distinct user_id)
+621
+--------------------------------------
