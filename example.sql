@@ -211,3 +211,44 @@ request_month, count(distinct user_id)
 '2017-12-01','624'
 
 --------------------------------------
+/*
+■レクチャー70
+集約結果を更に絞り込む「having」
+
+▼例題
+2017年のアクセスログから
+月間ユニークユーザー数が630人以上の月を一覧に
+*/
+
+/*
+※記述順序
+HAVING句は必ずGROUP BYの後に書く
+
+SELECT
+↓
+FROM
+↓
+WHERE
+↓
+GROUP BY
+↓
+HAVING
+*/
+
+-- HAVINGで630以上の条件をつける
+SELECT request_month, count(distinct user_id)
+FROM access_logs
+WHERE request_month >= '2017-01-01'
+AND request_month < '2018-01-01'
+GROUP BY request_month
+HAVING count(distinct user_id) >= 630;
+
+request_month, count(distinct user_id)
+'2017-03-01','641'
+'2017-04-01','632'
+'2017-05-01','649'
+'2017-07-01','639'
+'2017-08-01','638'
+'2017-09-01','646'
+
+--------------------------------------
