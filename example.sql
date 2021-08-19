@@ -252,3 +252,46 @@ request_month, count(distinct user_id)
 '2017-09-01','646'
 
 --------------------------------------
+/*
+■レクチャー72
+データの集約「GROUP BY」応用
+*/
+
+/*
+▼例題①
+全てのアクセスログを出力
+*/
+
+SELECT *
+FROM access_logs;
+
+/*
+▼例題②
+①で出したデータを2017年1月〜2017年6月までに絞り込み
+*/
+
+SELECT *
+FROM access_logs
+WHERE request_month >= '2017-01-01'
+AND request_month < '2017-07-01';
+
+/*
+▼例題③
+月ごとのリクエスト数を出力
+*/
+
+SELECT request_month, count(*)
+FROM access_logs
+GROUP BY request_month;
+
+/*
+▼例題④
+アクセス数が1000以上の月のみ出力
+*/
+
+SELECT request_month, count(*)
+FROM access_logs
+GROUP BY request_month
+HAVING count(*) >= 1000;
+
+--------------------------------------
