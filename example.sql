@@ -295,3 +295,32 @@ GROUP BY request_month
 HAVING count(*) >= 1000;
 
 --------------------------------------
+/*
+■レクチャー74
+データの並び替え「ORDER BY」
+*/
+
+-- ポイント：降順（大→小）で並び替える
+-- asc・・・照準　※デフォルト
+-- desc・・・降順
+-- ORDER BYを指定しない場合、どんな並び順になるかわからない
+
+/*
+▼例題①
+商品一覧を価格が高い順に並び替え
+*/
+
+SELECT *
+FROM products
+ORDER BY price DESC;
+
+/*
+▼例題②
+商品一覧を価格が低い順に並び替え
+*/
+
+SELECT *
+FROM products
+ORDER BY price ASC;
+
+--------------------------------------
