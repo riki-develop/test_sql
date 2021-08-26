@@ -133,3 +133,24 @@ SELECT concat(last_name, ' ', first_name, 'さん')
 FROM users;
 
 --------------------------------------
+/*
+■レクチャー84
+文字列の演算「文字列の連結」
+
+▼演習
+メルマガ送信用のリスト作成
+
+出力項目
+- 宛名「名字 + さん」
+
+- メールアドレス
+※ 例）中村さん, nakamura@example.com
+
+- 女性だけに送信
+*/
+
+SELECT concat(last_name, 'さん'), email, gender
+FROM users
+WHERE gender = 2;
+
+--------------------------------------
