@@ -154,3 +154,63 @@ FROM users
 WHERE gender = 2;
 
 --------------------------------------
+/*
+■レクチャー86〜87
+日付と時刻の演算
+
+▼主な日付と時刻の関数_演算子
+・現在の日付・・・current_date
+・現在の時刻・・・current_timestamp
+・n日後の日付・・・d + n
+・n日前の日付・・・d - n
+・x時間後の時刻・・・interval'x hour'
+・x時間前の時刻・・・ - interval'x hour'
+・extract・・・日付や時刻の特定の部分（年や月）までを取り出す
+*/
+
+/*現在の日付*/
+SELECT current_date();
+結果 -> 2021-08-27
+
+/*現在の時刻*/
+SELECT current_timestamp();
+結果 -> 2021-08-27 08:58:24
+
+/*n日後の日付　例）3日後の日付を取得*/
+SELECT current_date() + 3;
+結果 -> 20210830
+
+/*n日前の日付　例）3日前の日付を取得*/
+SELECT current_date() - 3;
+結果 -> 20210824
+
+/*x時間後の時刻　例）6時間後の時刻*/
+SELECT current_timestamp() + interval 6 hour;
+結果 -> 2021-08-27 15:02:42
+
+/*x時間前の時刻*/
+SELECT current_timestamp() - interval 6 hour;
+結果 -> 2021-08-27 03:04:09
+
+-- extrantについて
+-- 日付や時刻の特定の部分（年や月）までを取り出す
+
+/*ordersテーブルから注文日時（order_timeカラム）が、2017年01月のレコードを取得*/
+SELECT *
+FROM orders
+WHERE extract(year_month from order_time) = 201701;
+結果 -> '1','504','37500','2017-01-01 03:43:00'・・・etc
+
+/*ordersテーブルから注文日時（order_timeカラム）が、2017年のレコードを取得*/
+SELECT *
+FROM orders
+WHERE extract(year from order_time) = 2017;
+結果 -> '1','504','37500','2017-01-01 03:43:00'・・・etc
+
+/*ordersテーブルから注文日時（order_timeカラム）が、01月のレコードを取得*/
+SELECT *
+FROM orders
+WHERE extract(month from order_time) = 1;
+結果 -> '1','504','37500','2017-01-01 03:43:00'・・・etc
+
+--------------------------------------
