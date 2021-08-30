@@ -31,3 +31,28 @@ JOIN prefectures p
 ON u.prefecture_id = p.id;
 
 --------------------------------------
+/*
+■レクチャー93
+内部結合でテーブルを結合する「inner join」
+
+▼課題
+- 顧客一覧を取得
+- 都道府県IDは都道府県名に変換
+※ 必要な列 -> ユーザーID, 名字, 名前, 都道府県名
+↓
+▼追加条件
+- 女性だけのデータに絞り込み
+※ WHERE句を使って絞り込む
+
+- 性別の判定は【users】テーブルの【gender】
+gender -> 1・・・男性
+gender -> 2・・・女性
+*/
+
+SELECT u.id, u.last_name, u.first_name, p.name
+FROM users u
+INNER JOIN prefectures p
+ON u.prefecture_id = p.id
+WHERE u.gender = 2;
+
+--------------------------------------
