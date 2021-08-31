@@ -101,3 +101,38 @@ order_id, order_time, amount, user_id, user_id, last_name, first_name
 '85','2017-01-31 05:27:00','59700','85','85','塩谷','翔'
 
 --------------------------------------
+/*
+■レクチャー97
+外部結合「OUTER JOIN」
+
+▼外部結合とは
+・片方のテーブルの情報がすべて出力されるテーブルの結合
+・外部結合は欠落のあるデータを取り扱う結合
+・内部結合「INNER JOIN」と違い片側のキーが存在しなくても「null」として出力される
+
+▼LEFT OUTER JOIN / RIGHT OUTER JOIN
+LEFT OUTER JOIN・・・左側（FROM句で最初に書いたテーブル）をマスタとする
+RIGHT OUTER JOIN・・・右側（FROM句で後に書いたテーブル）をマスタとする
+*/
+
+-- LEFT OUTER JOIN は LEFT JOIN と省略できる
+SELECT u.last_name, u.id user_id, o.user_id order_user_id, o.id order_id
+FROM users AS u
+LEFT JOIN orders AS o
+ON u.id = o.user_id
+ORDER BY u.id;
+↓
+-- LEFT JOINで実行すると「null」が入る
+last_name, user_id, order_user_id, order_id
+'柴咲','1','1','3'
+'柴咲','1','1','40'
+'柴咲','1','1','447'
+'柴咲','1','1','651'
+'柴咲','1','1','887'
+'沢村','2','2','293'
+'阿部','3',NULL,NULL
+'佐古','4',NULL,NULL
+'宮里','5','5','399'
+'梅沢','6',NULL,NULL
+
+--------------------------------------
