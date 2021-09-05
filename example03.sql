@@ -166,3 +166,48 @@ id, name, num
 ...
 
 --------------------------------------
+/*
+■レクチャー98
+３つ以上のテーブルを結合するケース
+
+▼課題
+・注文一覧を出力
+┗注文詳細情報と商品情報も一覧の中に加える
+*/
+
+-- ポイント：【orders】をマスターテーブルとする
+
+SELECT o.id order_id, o.user_id, o.amount, o.order_time time, p.name product_name, od.product_qty, p.price product_price
+FROM orders AS o
+INNER JOIN order_details AS od
+ON o.id = od.order_id
+INNER JOIN products AS p
+on od.product_id = p.id;
+
+↓
+
+/*
+▼追加課題
+上記の【user_id】ではユーザーの特定ができない為
+名字と名前を一覧に追加
+*/
+
+SELECT o.id order_id, o.user_id, u.last_name, u.first_name, o.amount, o.order_time time, p.name product_name, od.product_qty, p.price product_price
+FROM orders AS o
+INNER JOIN order_details AS od
+ON o.id = od.order_id
+INNER JOIN products AS p
+on od.product_id = p.id
+INNER JOIN users AS u
+ON o.user_id = u.id;
+
+↓
+
+order_id, user_id, last_name, first_name, amount, time, product_name, product_qty, product_price
+'1','504','河田','綾','37500','2017-01-01 03:43:00','商品0785','2','2700'
+'1','504','河田','綾','37500','2017-01-01 03:43:00','商品0718','1','9200'
+'1','504','河田','綾','37500','2017-01-01 03:43:00','商品0458','3','5500'
+'1','504','河田','綾','37500','2017-01-01 03:43:00','商品0427','2','3200'
+...
+
+--------------------------------------
