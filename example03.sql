@@ -136,3 +136,33 @@ last_name, user_id, order_user_id, order_id
 '梅沢','6',NULL,NULL
 
 --------------------------------------
+/*
+■レクチャー97
+応用問題「OUTER JOIN」
+
+▼課題
+全ての商品についての販売個数を出力
+*/
+
+-- 商品情報はproductsテーブルに格納されている
+-- order_detailsテーブルに紐づけて販売個数を出す
+SELECT p.id, p.name, sum(od.product_qty)num
+FROM products AS p
+LEFT JOIN order_details AS od
+ON p.id = od.order_id
+GROUP BY p.id;
+
+id, name, num
+'1','商品0001','8'
+'2','商品0002','15'
+'3','商品0003','5'
+'4','商品0004','8'
+'5','商品0005','7'
+'6','商品0006','9'
+'7','商品0007','6'
+'8','商品0008','19'
+'9','商品0009','12'
+'10','商品0010','6'
+...
+
+--------------------------------------
