@@ -211,3 +211,32 @@ order_id, user_id, last_name, first_name, amount, time, product_name, product_qt
 ...
 
 --------------------------------------
+/*
+■レクチャー100
+多対多の関係を含む結合
+
+▼課題
+商品ID = ３に紐づく商品カテゴリ名をすべて出力
+- 商品ID
+- 商品名
+- カテゴリ名
+*/
+
+-- products テーブル（商品）
+-- products_categories テーブル（商品とカテゴリを紐づける中間テーブル）
+-- categories テーブル（カテゴリ）
+
+SELECT p.id prduct_id, p.name product_name, c.name category_name
+FROM products AS p
+INNER JOIN products_categories AS pc
+ON p.id = pc.product_id
+INNER JOIN categories AS c
+ON PC.category_id = c.id
+WHERE p.id = 3;
+↓
+prduct_id, product_name, category_name
+'3','商品0003','食品'
+'3','商品0003','おもちゃ'
+'3','商品0003','服'
+
+--------------------------------------
