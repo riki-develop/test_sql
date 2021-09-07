@@ -240,3 +240,61 @@ prduct_id, product_name, category_name
 '3','商品0003','服'
 
 --------------------------------------
+/*
+■レクチャー100
+テーブルの足し算「union, union all」
+
+▼課題
+ユーザーとアドミンユーザーを足し合わせた一覧を出力
+- email
+- 姓
+- 名
+- 性別
+*/
+
+/*
+※unionを使う場合、テーブル1とテーブル2で列を合わせる必要がある
+※同じ位置にあるカラムのデータ型は一致している必要がある
+
+users テーブル / admin_users テーブル
+email  - email
+last_name  -  last_name
+first_name  -  first_name
+dender  -  gender
+*/
+
+-- unionの場合、重複行は削除される
+SELECT email, last_name, first_name, gender
+FROM users
+UNION
+SELECT email, last_name, first_name, gender
+FROM admin_users;
+
+-- union allの場合、重複行は削除されない
+SELECT email, last_name, first_name, gender
+FROM users
+UNION ALL
+SELECT email, last_name, first_name, gender
+FROM admin_users;
+
+/*
+▼課題2
+usersテーブルから男性だけ、
+admin_usersテーブルから女性だけ抜き出す
+性別順に並び替える
+- email
+- 姓
+- 名
+- 性別
+
+※ポイント：「ORDER BY」は一度のクエリで一回しか使えない
+*/
+
+SELECT email, last_name, first_name, gender
+FROM users
+WHERE gender = 1
+UNION ALL
+SELECT email, last_name, first_name, gender
+FROM admin_users
+WHERE gender = 2
+ORDER BY gender;
