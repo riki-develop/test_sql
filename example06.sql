@@ -61,3 +61,39 @@ user_id, num, user_rank
 ...
 
 --------------------------------------
+/*
+■レクチャー114
+取得値nullを0に置き換える
+*/
+
+-- ▼例：下記クエリの実行結果にnullが混じっている
+SELECT p.id, p.name, SUM(pd.product_qty) AS num
+FROM products AS p
+LEFT OUTER JOIN order_details AS pd
+ON p.id = pd.product_id
+GROUP BY p.id;
+↓
+id, name, num
+'1','商品0001','6'
+'2','商品0002','10'
+'3','商品0003','5'
+'4','商品0004',NULL
+↓
+-- 上記のnullをCASE式を使って0に置き換える
+SELECT p.id, p.name,
+CASE
+WHEN SUM(od.product_qty) IS null then 0
+ELSE SUM(od.product_qty)
+END AS num
+FROM products AS p
+LEFT OUTER JOIN order_details AS od
+ON p.id = od.product_id
+GROUP BY p.id;
+↓
+id, name, num
+'1','商品0001','6'
+'2','商品0002','10'
+'3','商品0003','5'
+'4','商品0004','0'
+
+--------------------------------------
