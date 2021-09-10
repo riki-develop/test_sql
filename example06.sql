@@ -97,3 +97,56 @@ id, name, num
 '4','商品0004','0'
 
 --------------------------------------
+/*
+■レクチャー115〜117
+演習：商品販売個数でランク分け
+
+▼課題
+・全商品を販売個数でランク分け
+- A：20個以上
+- B：10個以上
+- C：10個未満
+
+・ランクが高い順に並び替え
+
+・必要なカラム
+- 商品ID
+- 商品名
+- 販売個数
+- ランク（A, B, C）
+*/
+
+/*
+1. 商品一覧を出力
+2. 商品一覧に注文詳細（order_details）を結合(ELFT OUTER JOIN)
+3. 商品ごとの販売数を求める（GROUP BY と　SUM()集約関数でproduct_qtyを集計）
+4. CASEを使って販売個数をランク付け
+5. ランクが高い順に並び替える（ORDER BY）
+*/
+
+SELECT p.id product_id, p.name product_name, SUM(product_qty) sales_num,
+CASE
+WHEN SUM(product_qty) >= 20 then 'A'
+WHEN SUM(product_qty) >= 10 then 'B'
+ELSE 'C'
+END sales_rank
+FROM products AS p
+LEFT OUTER JOIN order_details AS od
+ON p.id = od.product_id
+GROUP BY p.id
+ORDER BY sales_rank ASC;
+↓
+product_id, product_name, sales_num, sales_rank
+'23','商品0023','21','A'
+'65','商品0065','20','A'
+'149','商品0149','23','A'
+'468','商品0468','24','A'
+'480','商品0480','21','A'
+'487','商品0487','20','A'
+'567','商品0567','23','A'
+'992','商品0992','21','A'
+'2','商品0002','10','B'
+'10','商品0010','13','B'
+...
+
+--------------------------------------
