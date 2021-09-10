@@ -56,3 +56,45 @@ order_year_month, average_customer_spend
 '201712','36714'
 
 --------------------------------------
+/*
+■レクチャー121
+応用問題：都道府県別の平均客単価
+
+▼問題
+・都道府県別の平均客単価
+
+・必要な列
+- 都道府県ID
+- 都道府県名
+- 平均客単価（小数点第1位で四捨五入）
+
+・並び順
+- 都道府県ID昇順
+*/
+
+-- GROUP BY句を使ってprefecture_idで集約し都道府県毎の平均客単価を出力
+-- 注文情報はordersテーブル、都道府県はusersテーブルのprefecture_id、これを紐づける
+-- 都道府県名はprefecturesテーブルが持っているので紐づける
+
+SELECT
+pref.id AS prefectuere_id,
+pref.name AS prefectere_name,
+ROUND(AVG(o.amount), 0) AS average_costomer_spend
+FROM orders AS o
+INNER JOIN users AS u
+ON o.user_id = u.id
+INNER JOIN prefectures AS pref
+ON u.prefecture_id = pref.id
+GROUP BY pref.id
+ORDER BY pref.id ASC;
+↓
+prefectuere_id, prefectere_name, average_costomer_spend
+'1','北海道','34300'
+'2','青森県','34713'
+'3','岩手県','34853'
+'4','宮城県','26033'
+'5','秋田県','38827'
+'6','山形県','44892'
+...
+
+--------------------------------------
