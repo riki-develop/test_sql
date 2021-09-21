@@ -143,3 +143,54 @@ WHERE id = 3;
 ↓
 id, name, price
 '3','SQL入門1','1000'
+
+--------------------------------------
+/*
+■レクチャー129
+特定の条件に合致するデータを更新「UPDATE」
+
+・累計販売数が10を超えている商品の価格を5%アップ
+*/
+
+-- 商品IDごとの合計販売数を出力
+SELECT product_id, SUM(product_qty)
+FROM order_details
+GROUP BY product_id;
+↓
+product_id, SUM(product_qty)
+'1','6'
+'2','10'
+'3','5'
+...
+
+-- 累計販売個数が10以上のグループ絞り込み
+SELECT product_id, SUM(product_qty)
+FROM order_details
+GROUP BY product_id
+HAVING SUM(product_qty) >= 10;
+↓
+product_id, SUM(product_qty)
+'2','10'
+'10','13'
+'11','11'
+...
+
+-- 上記で絞り込んだ対象商品をサブクエリとしてせっと->5%をかける
+UPDATE products
+SET price =price * 1.05
+WHERE id IN
+(
+SELECT product_id
+FROM order_details
+GROUP BY product_id
+HAVING SUM(product_qty) >= 10
+);
+
+select *
+FROM products;
+↓
+id, name, price
+'1','商品0001','4293'
+'2','商品0002','7748'
+'3','SQL入門1','1000'
+...
