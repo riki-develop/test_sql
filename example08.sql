@@ -113,3 +113,33 @@ id, name, price
 ...
 
 --------------------------------------
+/*
+■レクチャー128
+特定の条件に合致するデータを更新「UPDATE」
+
+・商品idが「3」の商品名を「SQL入門」に変更
+*/
+
+-- 存在確認
+SELECT *
+FROM products
+WHERE id = 3;
+↓
+id, name, price
+'3','商品0003','1296'
+
+-- データを更新
+UPDATE products
+SET name = 'SQL入門'
+WHERE id = 3;
+↓
+id, name, price
+'3','SQL入門','1296'
+
+-- 複数のデータをまとめて更新するパターン
+UPDATE products
+SET name = 'SQL入門1', price = 1000
+WHERE id = 3;
+↓
+id, name, price
+'3','SQL入門1','1000'
