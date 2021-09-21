@@ -194,3 +194,29 @@ id, name, price
 '2','商品0002','7748'
 '3','SQL入門1','1000'
 ...
+
+--------------------------------------
+/*
+■レクチャー130
+行の削除「delete」
+
+・商品とカテゴリのひも付きを削除
+- 商品とカテゴリを紐付けている中間テーブル「produbts_categories」の中身を削除
+
+※注意点
+・DELETEで削除したデータは基本的には元に戻せない
+・大量のデータをDELETEする時は予想外に時間がかかる事がある
+*/
+
+-- テーブルの詳細確認
+SELECT *
+FROM products_categories;
+↓
+id, product_id, category_id
+'1','1','1'
+'2','2','4'
+'3','2','5'
+...
+
+-- DELETEクエリ
+DELETE FROM products_categories;
