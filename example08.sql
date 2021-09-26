@@ -246,3 +246,44 @@ null, null, null
 
 ※「DELETE」文を使う上での注意点
 WHERE句を指定しない場合テーブル全体のデータが削除対象となる
+
+--------------------------------------
+/*
+■レクチャー132
+削除条件にサブクエリを使う「delete」
+
+・一つも売れていない商品を削除
+*/
+
+-- 一度でも売れた事がある商品を出力
+-- order_detailsテーブルのproducet_idを使う
+SELECT product_id
+FROM order_details
+GROUP BY product_id;
+↓
+product_id
+'1'
+'2'
+'3'
+'5'
+...
+
+-- 削除クエリ
+DELETE FROM products
+WHERE id NOT IN
+(
+SELECT product_id
+FROM order_details
+GROUP BY product_id
+);
+↓
+-- 実行後の確認
+SELECT *
+FROM products;
+↓
+id, name, price
+'1','商品0001','4293'
+'2','商品0002','7748'
+'3','SQL入門1','1000'
+'5','商品0005','7695'
+...
