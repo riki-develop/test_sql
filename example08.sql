@@ -220,3 +220,29 @@ id, product_id, category_id
 
 -- DELETEクエリ
 DELETE FROM products_categories;
+
+--------------------------------------
+/*
+■レクチャー131
+条件を指定して行を削除「delete」
+
+・商品ID「1001」は間違って登録した商品のため削除
+*/
+
+-- 現状確認
+SELECT *
+FROM products
+WHERE id = '1001';
+↓
+id, name, price
+'1001','新商品A','810'
+
+-- 削除クエリ
+DELETE FROM products
+WHERE id = '1001';
+↓
+id, name, price
+null, null, null
+
+※「DELETE」文を使う上での注意点
+WHERE句を指定しない場合テーブル全体のデータが削除対象となる
