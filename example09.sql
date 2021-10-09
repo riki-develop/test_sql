@@ -147,3 +147,33 @@ SHOW tables;
 何もないので表示されない
 
 --------------------------------------
+/*
+■レクチャー138
+・データベース「book_store」の削除
+*/
+
+-- 現状確認
+SHOW DATABASES;
+↓
+Database
+'book_store'
+'information_schema'
+'mydb'
+'mysql'
+'performance_schema'
+'sys'
+
+-- データベース：book_store削除クエリ
+DROP DATABASE book_store;
+
+-- 実行結果確認
+SHOW DATABASES;
+↓
+Database
+'information_schema'
+'mydb'
+'mysql'
+'performance_schema'
+'sys'
+
+--------------------------------------
