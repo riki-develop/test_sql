@@ -132,3 +132,18 @@ Field, Type, Null, Key, Default, Extra
 'title','varchar(255)','NO','',NULL,''
 
 --------------------------------------
+/*
+■レクチャー138
+・booksテーブルの削除
+*/
+
+-- 現状確認
+SHOW tables;
+-- boobksテーブル削除クエリ
+DROP TABLE books;
+-- 実行結果確認
+SHOW tables;
+↓
+何もないので表示されない
+
+--------------------------------------
